@@ -16,22 +16,24 @@ function start() {
         box.className = "box";
         boxes[i] = box;
         box.addEventListener("click", function () {
-            if (click === 0) {
-                box.innerHTML = '<span>X</span>';
-                tictac[i] = 0;
-                click = 1;
-                if (checkV(tictac, i) === true || checkH(tictac, i) === true || checkD(tictac, i) === true) {
-                    p1++;
-                    document.getElementById("p1").innerText = p1;
+            if(tictac[i]==null || tictac[i]===25) {
+                if (click === 0) {
+                    box.innerHTML = '<span>X</span>';
+                    tictac[i] = 0;
+                    click = 1;
+                    if (checkV(tictac, i) === true || checkH(tictac, i) === true || checkD(tictac, i) === true) {
+                        p1++;
+                        document.getElementById("p1").innerText = p1;
+                    }
+                } else {
+                    box.innerHTML = '<span>O</span>';
+                    tictac[i] = 1;
+                    if (checkV(tictac, i) === true || checkH(tictac, i) === true || checkD(tictac, i) === true) {
+                        p2++;
+                        document.getElementById("p2").innerText = p2;
+                    }
+                    click = 0;
                 }
-            } else {
-                box.innerHTML = '<span>O</span>';
-                tictac[i] = 1;
-                if (checkV(tictac, i) === true || checkH(tictac, i) === true || checkD(tictac, i) === true) {
-                    p2++;
-                    document.getElementById("p2").innerText = p2;
-                }
-                click = 0;
             }
         });
         bor.append(box);
@@ -64,7 +66,7 @@ function checkH(tictac, p1) {
             return finalCheck(p1, p1 - 1, p1 - 2);
         }
     }
-    if ((p1 + 1) % 5 !== 0 && (p1 - 1) % 5 !== 0) {
+    if ((p1 + 1) % 5 !== 0 && (p1 - 1) % 5 !== 0 && p1 % 5 !==0) {
         if (tictac[p1] === tictac[p1 + 1] && tictac[p1] === tictac[p1 - 1]) {
             console.log("3337");
             return finalCheck(p1, p1 + 1, p1 - 1);
